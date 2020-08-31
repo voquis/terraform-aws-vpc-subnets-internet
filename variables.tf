@@ -62,3 +62,33 @@ variable "internet_gateway" {
   type        = bool
   default     = true
 }
+
+variable "flowlogs" {
+  description = "Whether to create VPC flowlogs"
+  type        = bool
+  default     = false
+}
+
+variable "log_traffic_type" {
+  description = "Type of VPC traffic to log: ACCEPT, REJECT or ALL."
+  type        = string
+  default     = "ALL"
+}
+
+variable "log_retention_in_days" {
+  description = "Number of days to keep CloudWatch logs"
+  type        = number
+  default     = 30
+}
+
+variable "role_name" {
+  description = "Flowlog IAM Role assumed name, automatically generated if ommitted"
+  type        = string
+  default     = null
+}
+
+variable "log_policy_name" {
+  description = "IAM policy name for flowlog to write to CloudWatch log groups and streams"
+  type        = string
+  default     = null
+}

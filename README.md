@@ -2,19 +2,21 @@ Terraform AWS module for VPC, subnets and internet routing
 ===
 
 Terraform 0.12 module to create a vpc with a list of subnets and optional internet routing.
+Optionally capture VPC flowlogs to Cloudwatch.
 
 Example:
 ```terraform
 provider "aws" {
-  version = "2.65.0"
+  version = "3.4.0"
 }
 
 module "networking" {
   source           = "voquis/vpc-subnets-internet/aws"
-  version          = "0.0.1"
+  version          = "0.0.2"
   name             = "website"
   internet_gateway = true
   cidr_block       = "10.0.0.0/16"
+  flowlogs         = true
   subnets = [
     {
       availability_zone       = "euw2-az1"
