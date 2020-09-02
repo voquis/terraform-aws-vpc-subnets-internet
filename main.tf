@@ -39,28 +39,14 @@ resource "aws_internet_gateway" "this" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# If internet gateway requested, create route table between VPC and internet gateway
-# Provider Docs: https://www.terraform.io/docs/providers/aws/r/route_table.html
+# Create optional route for internet gateway and attach to main VPC route table
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route
 # ---------------------------------------------------------------------------------------------------------------------
-
-resource "aws_route_table" "this" {
-  count  = var.internet_gateway == true ? 1 : 0
-  vpc_id = aws_vpc.this.id
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.this[0].id
-  }
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# If internet gateway requested, add internet gateway route table to main VPC route table
-# Provider Docs: https://www.terraform.io/docs/providers/aws/r/main_route_table_association.html
-# ---------------------------------------------------------------------------------------------------------------------
-
-resource "aws_main_route_table_association" "this" {
-  count          = var.internet_gateway == true ? 1 : 0
-  vpc_id         = aws_vpc.this.id
-  route_table_id = aws_route_table.this[0].id
+resource "aws_route" "this" {
+  count                  = var.internet_gateway == true ? 1 : 0
+  route_table_id         = aws_vpc.this.default_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.this[0].id
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
