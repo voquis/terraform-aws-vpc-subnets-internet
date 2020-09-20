@@ -17,3 +17,7 @@ output "flow_log" {
 output "cloudwatch_log_group" {
   value = aws_cloudwatch_log_group.this
 }
+
+output "default_security_group" {
+  value = aws_default_security_group.this
+}

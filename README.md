@@ -2,6 +2,7 @@ Terraform AWS module for VPC, subnets and internet routing
 ===
 
 Terraform 0.12+ module to create a vpc with a list of subnets and optional internet routing.
+Brings automatically created default security group under Terraform management.
 If internet routing is requested, a route is added to the default VPC routing table
 Optionally capture VPC flowlogs to Cloudwatch.
 
@@ -13,7 +14,7 @@ provider "aws" {
 
 module "networking" {
   source           = "voquis/vpc-subnets-internet/aws"
-  version          = "0.0.3"
+  version          = "0.0.4"
   name             = "website"
   internet_gateway = true
   cidr_block       = "10.0.0.0/16"
