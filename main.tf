@@ -58,6 +58,9 @@ resource "aws_subnet" "this" {
 resource "aws_internet_gateway" "this" {
   count  = var.internet_gateway == true ? 1 : 0
   vpc_id = aws_vpc.this.id
+  tags = {
+    Name = var.internet_gateway_name
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -82,6 +85,9 @@ resource "aws_flow_log" "this" {
   log_destination = aws_cloudwatch_log_group.this[0].arn
   traffic_type    = var.log_traffic_type
   vpc_id          = aws_vpc.this.id
+  tags = {
+    Name = var.flowlogs_name
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

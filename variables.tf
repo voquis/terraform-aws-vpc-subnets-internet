@@ -63,10 +63,22 @@ variable "internet_gateway" {
   default     = true
 }
 
+variable "internet_gateway_name" {
+  description = "Internet gateway name tag"
+  type        = string
+  default     = null
+}
+
 variable "flowlogs" {
   description = "Whether to create VPC flowlogs"
   type        = bool
   default     = false
+}
+
+variable "flowlogs_name" {
+  description = "Flowlogs Name Tag"
+  type        = string
+  default     = null
 }
 
 variable "log_traffic_type" {
