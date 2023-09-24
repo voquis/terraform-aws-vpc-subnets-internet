@@ -13,12 +13,14 @@ provider "aws" {
 }
 
 module "networking" {
-  source           = "voquis/vpc-subnets-internet/aws"
-  version          = "0.0.4"
-  name             = "website"
-  internet_gateway = true
-  cidr_block       = "10.0.0.0/16"
-  flowlogs         = true
+  source                = "voquis/vpc-subnets-internet/aws"
+  version               = "0.0.5"
+  name                  = "website"
+  internet_gateway      = true
+  internet_gateway_name = "my_internet_gateway_name"
+  cidr_block            = "10.0.0.0/16"
+  flowlogs              = true
+  flowlogs_name         = "my_flowlogs_name"
   subnets = [
     {
       availability_zone       = "euw2-az1"
