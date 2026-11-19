@@ -69,6 +69,42 @@ variable "internet_gateway_name" {
   default     = null
 }
 
+variable "enable_ipv6" {
+  description = "Enable IPv6 on the VPC and dual-stack subnets"
+  type        = bool
+  default     = false
+}
+
+variable "ipv6_ipam_pool_id" {
+  description = "ID of an IPv6 IPAM pool to source the VPC IPv6 CIDR block from. If set, a generated IPv6 CIDR block is not assigned."
+  type        = string
+  default     = null
+}
+
+variable "ipv6_netmask_length" {
+  description = "Netmask length to request from the IPv6 IPAM pool (44-60, in increments of 4)."
+  type        = number
+  default     = null
+}
+
+variable "ipv6_subnet_netbits" {
+  description = "Number of bits to add to the VPC IPv6 CIDR block when sizing subnets. Default 4 produces /60 subnets from the /56 generated block, matching existing IPv6 subnets."
+  type        = number
+  default     = 4
+}
+
+variable "egress_only_internet_gateway" {
+  description = "Whether to create an egress-only internet gateway"
+  type        = bool
+  default     = false
+}
+
+variable "egress_only_internet_gateway_name" {
+  description = "Egress-only internet gateway name tag"
+  type        = string
+  default     = null
+}
+
 variable "flowlogs" {
   description = "Whether to create VPC flowlogs"
   type        = bool

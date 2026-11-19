@@ -10,6 +10,10 @@ output "internet_gateway" {
   value = aws_internet_gateway.this
 }
 
+output "egress_only_internet_gateway" {
+  value = aws_egress_only_internet_gateway.this
+}
+
 output "flow_log" {
   value = aws_flow_log.this
 }
